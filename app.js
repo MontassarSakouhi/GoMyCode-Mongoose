@@ -83,17 +83,19 @@ const Monta=new Person({name:"Monta",age:23,favoriteFoods:["BOURGAR","baz moch s
 // .then(person=>{console.log(person);console.log('this person has been deleted')})
 // .catch(err=>console.log(err))
 
-Person.remove({name:"Mary"})
-.then(person=>{
-  !person?console.log('cannot find this person'):console.log(person);console.log('person has been deleted')
-}).catch(err=>console.log(err))
+// Delete Many Documents with model.remove() doesnt work !!!!!!!!!!
+// Person.remove({name:"Mary"})
+// .then(person=>{
+//   !person?console.log('cannot find this person'):console.log(person);console.log('person has been deleted')
+// }).catch(err=>console.log(err))
+
+//Chain Search Query Helpers to Narrow Search Results
+Person.find({favoriteFoods:{$in:["burritos"]}}).sort({name:1}).limit(2).select('-age').exec().then((data)=>console.log(data))
 
 
 
 
 mongoose.connect('mongodb+srv://Monta:Monta123@gomycodecluster.suxgp.mongodb.net/HugeDB').then(()=>{console.log('Server Is Onnnn')}).catch(err=>console.log(err))
-
-
 
 
 
